@@ -1,0 +1,7 @@
+{
+  "include": ["secret_scrubber", "tests"],
+  "pythonVersion": "3.10",
+  "typeCheckingMode": "basic",
+  "reportCallIssue": "error",
+  "reportMissingImports": "warning"
+}

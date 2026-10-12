@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secret-scrubber"
+version = "0.1.0"
+description = "Masque les secrets (clés API, tokens, JWT…) dans les transcripts d'agents IA. Port Python de mrgoonie/maskara."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Julien Fernandez" }]
+keywords = ["security", "secrets", "redaction", "claude-code", "transcripts"]
+dependencies = []
+
+[project.scripts]
+secret-scrubber = "secret_scrubber.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/julien-fernandez/secret-scrubber"
+
+[tool.setuptools.packages.find]
+include = ["secret_scrubber*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+# F = pyflakes (noms non définis, imports), B = flake8-bugbear (pièges courants).
+select = ["F", "B"]

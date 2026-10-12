@@ -1,0 +1,32 @@
+name: lint
+
+# Static analysis gate (ruff F+B, pyright reportCallIssue) — must be green before merge.
+# Catches the "invalid kwarg / undefined name swallowed by except" bug class.
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package + tooling
+        run: pip install -e . ruff==0.14.9 pyright==1.1.408 pytest
+
+      - name: ruff (pyflakes + bugbear)
+        run: ruff check secret_scrubber/
+
+      - name: pyright (reportCallIssue)
+        run: pyright
+
+      - name: pytest
+        run: pytest -q
